@@ -1,0 +1,19 @@
+{
+  "name": "pushbutton",
+  "version": "0.1.0",
+  "description": "http://hapjs.github.io/toastjs/demos/toastjs.html",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtdalp/pushbutton.git"
+  },
+  "author": "xisa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gtdalp/pushbutton/issues"
+  },
+  "homepage": "https://github.com/gtdalp/pushbutton#readme"
+}
