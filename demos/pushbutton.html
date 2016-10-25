@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Pushbutton</title>
+<link rel="stylesheet" type="text/css" href="../src/css/base.css" />
+<link rel="stylesheet" type="text/css" href="pushbutton.css" />
+<script src="../src/jslib/require.js"></script>
+</head>
+<body>
+<style type="text/css">
+#click{
+	position:absolute;
+	top:50%;
+	width:100%;
+	margin-top:-50px;
+	font-size:30px;
+	text-align:center;
+}
+</style>
+<div id="click">click show Pushbutton</div>
+<script>
+require(['zepto', 'iscroll', 'pushbutton'], function(Pushbutton){
+	var pub = new Pushbutton('#pushbutton', {
+		data: [
+			{text:'拍照', cls: 'xx', attr: {key: 'xxx'} },
+			{text:'录像', attr: [
+                {key1: 'xxx1'},
+                {key2: 'xxx2'}
+            ]},
+			{text:'语音录入'}
+		],
+        onClick: function( dom ) {
+			console.log(dom)
+			// 点击回调
+		},
+        isShow: true   // 默认是否显示
+	});
+});
+require.config({
+    paths: {
+        "zepto": "../src/jslib/zepto.min",
+        "iscroll": "../src/jslib/iscroll.min",
+        "pushbutton": "../build/pushbutton"
+    }
+});
+</script>
+</body>
+</html>
