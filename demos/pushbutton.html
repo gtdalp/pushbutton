@@ -22,8 +22,10 @@
 }
 </style>
 <div id="click">click show Pushbutton</div>
+<section id="pushbutton" class="pushbutton"></section>
 <script>
-require(['zepto', 'iscroll', 'pushbutton'], function(Pushbutton){
+require(['zepto', 'iscroll', 'pushbutton'], function(){
+    var Pushbutton = require('pushbutton');
 	var pub = new Pushbutton('#pushbutton', {
 		data: [
 			{text:'拍照', cls: 'xx', attr: {key: 'xxx'} },
@@ -35,7 +37,6 @@ require(['zepto', 'iscroll', 'pushbutton'], function(Pushbutton){
 		],
         onClick: function( dom ) {
 			console.log(dom)
-			// 点击回调
 		},
         isShow: true   // 默认是否显示
 	});

@@ -25,7 +25,7 @@
             id = 'pushbutton' + Math.random().toString().replace('0.', '');
             this.ele.attr('id', id);
         }
-        this.id = id;
+        this.id = $('#' + id);
         this.init(options);
     }
     Pushbutton.prototype = {
@@ -43,11 +43,14 @@
         },
         // 入口
         render: function () {
-            // $(xx).append(this.createTpl())
+            this.id.addClass('widget-ui-pushbutton').append(this.createTpl());
+            this.show();
+            // 事件
+            this.event();
         },
         // 销毁ListLoading
         destroy: function () {
-            $('#' + this.id).remove();
+            this.id.remove();
         },
         // 刷新listloading
         refresh: function () {
@@ -55,45 +58,67 @@
         },
         // 创建模板
         createTpl: function () {
-            var dataF, cls, key, text, i = 0;
+            var dataF, cls, key, text, i = 0, n = 0, arr, arrLen = 0;
         	var data = this.options.data;
         	var id = this.id;
+            var ahref = '';
         	if (!Array.isArray(data)) {
         		data = [];
         	}
         	var len = data.length;
-            var tpl = '<section id="' + id + '" class="pushbutton">\
-            		<div class="bg"></div>\
-					<ul class="push-list">';
+            var tpl = '<div class="widget-ui-pushbutton-list">';
 
-				for (; i < len; i++) {
-					dataF = data[i];
-					cls = dataF.cls ? 'class="' + dataF.cls + '"' : '';
-					key = dataF.key ? 'data-key="' + dataF.key + '"' : '';
-					text = dataF.text || '';
-					tpl += '<li ' + cls + ' ' + key + '>' + text + '</li>';
-				}
+			for (; i < len; i++) {
+				dataF = data[i];
+				cls = dataF.cls || '';
+				// key = dataF.key ? 'data-key="' + dataF.key + '"' : '';
+				text = dataF.text || '';
+                arr = dataF.attr;
+                if (Array.isArray(arr)) {
+                    arrLen = arr.length;
+                    for (n = 0; n < arrLen; n++) {
+                        //
+                    }
+                }
+                if (typeof arr === 'object') {
+                    for (arr in key) {
+                        console.log(arr)
+                    }
+                }
+
+				tpl += '<a href="javascript:void(0);" class="list-a' + cls + '" ' + key + '>' + text + '</a>';
+			}
 				
-				tpl += '<li class="pushbutton-cancel">取消</li>\
-					</ul>\
-				</section>';
+			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel">取消</a>\
+					</div>';
 			return tpl;
         },
         // 事件
         event: function () {
-            // 
+            var id = this.id;
+            var op = this.options;
+            var onClick = op.onClick;
+            var dom = '';
+            // 点击
+            id.on('click', function (e) {
+                dom = e.target || e.srcElement;
+                console.log(e.srcElement);
+            });
+            // if ($.isFuntion(onClick)) {
+            //     onClick(dom);
+            // }
         },
         // 显示
         show: function () {
         	var In = this.options.animateIn;
-            $('#' + this.id).show().addClass(In);
+            this.id.show().addClass(In);
         },
         // 隐藏
         hide: function () {
         	var op = this.options;
         	var In = op.animateIn;
         	var Out = op.animateOut;
-        	var id = $('#' + this.id);
+        	var id = this.id;
             id.addClass(Out);
     		setTimeout(function() {
     			id.removeClass(Out + ' ' + In).hide();

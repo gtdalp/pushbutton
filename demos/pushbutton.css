@@ -11,7 +11,7 @@
 .pushbutton>.bg{
 	background:rgba(0,0,0,.4);
 }
-.push-list{
+.widget-ui-pushbutton-list{
 	position:absolute;
 	left: 0;
 	bottom: 0; 
@@ -21,16 +21,17 @@
 	text-align: center; 
 	color: #333;
 }
-.push-list li{ 
-	border-top:1px solid #d4d4d4; 
+.widget-ui-pushbutton-list>a.list-a{
+	display:block;
 	padding:15px; 
+	border-top:1px solid #d4d4d4; 
 	font-size: 16px;
 	cursor:pointer;
 	white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
 }
-.push-list li:first-child{
+.widget-ui-pushbutton-list>a.list-a:first-child{
 	border:none;
 }
 .pushbutton-cancel{
@@ -94,7 +95,7 @@
 	from {opacity:1;}
 	to {opacity:0;}
 }
-.pushbutton-in ul.push-list{
+.pushbutton-in ul.widget-ui-pushbutton-list{
     animation:pushbuttonUlIn .35s forwards;
     -webkit-animation:pushbuttonUlIn .35s forwards;
     -moz-animation:pushbuttonUlIn .35s forwards;
@@ -121,7 +122,7 @@
 	from {bottom:-100%;}
 	to {bottom:0;}
 }
-.pushbutton-out ul.push-list{
+.pushbutton-out ul.widget-ui-pushbutton-list{
     animation:pushbuttonUlOut .35s forwards;
     -webkit-animation:pushbuttonUlOut .35s forwards;
     -moz-animation:pushbuttonUlOut .35s forwards;
