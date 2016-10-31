@@ -56,12 +56,19 @@
         refresh: function () {
             // 
         },
+        // 遍历obj
+        forInAttr: function (data) {
+            var attr = '', key;
+            for (key in data) {
+                attr += key + '="' + data[key] + '" ';
+            }
+            return attr;
+        },
         // 创建模板
         createTpl: function () {
-            var dataF, cls, key, text, i = 0, n = 0, arr, arrLen = 0;
+            var dataF, cls, key, text, attr, i = 0, n = 0, arr, arrLen = 0;
         	var data = this.options.data;
         	var id = this.id;
-            var ahref = '';
         	if (!Array.isArray(data)) {
         		data = [];
         	}
@@ -71,22 +78,19 @@
 			for (; i < len; i++) {
 				dataF = data[i];
 				cls = dataF.cls || '';
-				// key = dataF.key ? 'data-key="' + dataF.key + '"' : '';
 				text = dataF.text || '';
                 arr = dataF.attr;
-                if (Array.isArray(arr)) {
+                attr = '';
+                if (typeof arr == 'object' && !Array.isArray(arr)) {
+                    attr += this.forInAttr(arr);
+                } else if (Array.isArray(arr)) {
                     arrLen = arr.length;
                     for (n = 0; n < arrLen; n++) {
-                        //
-                    }
-                }
-                if (typeof arr === 'object') {
-                    for (arr in key) {
-                        console.log(arr)
+                        attr += this.forInAttr(arr[n]);
                     }
                 }
 
-				tpl += '<a href="javascript:void(0);" class="list-a ' + cls + '" ' + key + '>' + text + '</a>';
+				tpl += '<a href="javascript:void(0);" class="list-a ' + cls + '" ' + attr + '>' + text + '</a>';
 			}
 				
 			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel list-a">取消</a>\
