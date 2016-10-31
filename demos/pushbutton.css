@@ -44,9 +44,6 @@
 	display:block;
 	animation:pushbuttonIn .35s forwards;
 	-webkit-animation:pushbuttonIn .35s forwards;
-	-moz-animation:pushbuttonIn .35s forwards;
-	-o-animation:pushbuttonIn .35s forwards;
-	-ms-animation:pushbuttonIn .35s forwards;
 }
 @keyframes pushbuttonIn{
 	from {opacity:0;}
@@ -56,24 +53,9 @@
 	from {opacity:0;}
 	to {opacity:1;}
 }
-@-moz-keyframes pushbuttonIn{
-	from {opacity:0;}
-	to {opacity:1;}
-}
-@-o-keyframes pushbuttonIn{
-	from {opacity:0;}
-	to {opacity:1;}
-}
-@-ms-keyframes pushbuttonIn{
-	from {opacity:0;}
-	to {opacity:1;}
-}
 .pushbutton-out{
 	animation:pushbuttonOut .35s forwards;
 	-webkit-animation:pushbuttonOut .35s forwards;
-	-moz-animation:pushbuttonOut .35s forwards;
-	-o-animation:pushbuttonOut .35s forwards;
-	-ms-animation:pushbuttonOut .35s forwards;
 }
 @keyframes pushbuttonOut{
 	from {opacity:1;}
@@ -83,24 +65,9 @@
 	from {opacity:1;}
 	to {opacity:0;}
 }
-@-moz-keyframes pushbuttonOut{
-	from {opacity:1;}
-	to {opacity:0;}
-}
-@-o-keyframes pushbuttonOut{
-	from {opacity:1;}
-	to {opacity:0;}
-}
-@-ms-keyframes pushbuttonOut{
-	from {opacity:1;}
-	to {opacity:0;}
-}
 .pushbutton-in ul.widget-ui-pushbutton-list{
     animation:pushbuttonUlIn .35s forwards;
     -webkit-animation:pushbuttonUlIn .35s forwards;
-    -moz-animation:pushbuttonUlIn .35s forwards;
-    -o-animation:pushbuttonUlIn .35s forwards;
-    -ms-animation:pushbuttonUlIn .35s forwards;
 }
 @keyframes pushbuttonUlIn{
 	from {bottom:-100%;}
@@ -110,42 +77,15 @@
 	from {bottom:-100%;}
 	to {bottom:0;}
 }
-@-moz-keyframes pushbuttonUlIn{
-	from {bottom:-100%;}
-	to {bottom:0;}
-}
-@-o-keyframes pushbuttonUlIn{
-	from {bottom:-100%;}
-	to {bottom:0;}
-}
-@-ms-keyframes pushbuttonUlIn{
-	from {bottom:-100%;}
-	to {bottom:0;}
-}
 .pushbutton-out ul.widget-ui-pushbutton-list{
     animation:pushbuttonUlOut .35s forwards;
     -webkit-animation:pushbuttonUlOut .35s forwards;
-    -moz-animation:pushbuttonUlOut .35s forwards;
-    -o-animation:pushbuttonUlOut .35s forwards;
-    -ms-animation:pushbuttonUlOut .35s forwards;
 }
 @keyframes pushbuttonUlOut{
 	from {bottom:0;}
 	to {bottom:-100%;}
 }
 @-webkit-keyframes pushbuttonUlOut{
-	from {bottom:0;}
-	to {bottom:-100%;}
-}
-@-moz-keyframes pushbuttonUlOut{
-	from {bottom:0;}
-	to {bottom:-100%;}
-}
-@-o-keyframes pushbuttonUlOut{
-	from {bottom:0;}
-	to {bottom:-100%;}
-}
-@-ms-keyframes pushbuttonUlOut{
 	from {bottom:0;}
 	to {bottom:-100%;}
 }

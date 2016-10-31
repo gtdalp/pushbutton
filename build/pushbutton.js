@@ -86,10 +86,10 @@
                     }
                 }
 
-				tpl += '<a href="javascript:void(0);" class="list-a' + cls + '" ' + key + '>' + text + '</a>';
+				tpl += '<a href="javascript:void(0);" class="list-a ' + cls + '" ' + key + '>' + text + '</a>';
 			}
 				
-			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel">取消</a>\
+			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel list-a">取消</a>\
 					</div>';
 			return tpl;
         },
@@ -99,6 +99,7 @@
             var op = this.options;
             var onClick = op.onClick;
             var dom = '';
+
             // 点击
             id.on('click', function (e) {
                 dom = e.target || e.srcElement;
@@ -124,6 +125,141 @@
     			id.removeClass(Out + ' ' + In).hide();
     		}, 351);
         },
+        // 点击事件
+        evt: function Events(element, type, eventHandle, flg){
+            var touchable = "ontouchstart" in window;
+            var clickEvent = touchable ? "touchstart" : "click",
+                mouseDownEvent = touchable ? "touchstart" : "mousedown",
+                mouseUpEvent = touchable ? "touchend" : "mouseup",
+                mouseMoveEvent = touchable ? "touchmove" : "mousemove",
+                mouseMoveOutEvent = touchable ? "touchleave" : "mouseout";
+            var _returnData = function(evt){
+                var neweEvt = {};
+                var cev = evt.originalEvent;
+                if( cev == undefined ) {
+                    cev = evt;
+                }
+                if(cev.changedTouches){
+                    neweEvt.pageX = cev.changedTouches[0].pageX;
+                    neweEvt.pageY = cev.changedTouches[0].pageY;
+                    neweEvt.clientX = cev.changedTouches[0].clientX;
+                    neweEvt.clientY = cev.changedTouches[0].clientY;
+                }else{
+                    neweEvt.pageX = evt.pageX;
+                    neweEvt.pageY = evt.pageY;
+                    neweEvt.clientX = evt.clientX;
+                    neweEvt.clientY = evt.clientY;
+                }
+                neweEvt.evt = evt;
+                return neweEvt;
+            };
+            var getTouchPos = function(e){
+                return { x : e.clientX , y: e.clientY };
+            }
+            //计算两点之间距离
+            var getDist = function(p1 , p2){
+                if(!p1 || !p2) return 0;
+                return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
+            };
+            var _onClick = function(dom, evt, callback){
+                var neweEvt = _returnData(evt);
+                callback(dom, neweEvt);
+            };
+            var _onClickDown = function(dom, evt, callback){
+                var neweEvt = _returnData(evt);
+                callback(dom, neweEvt);
+            };
+            var _onClickUp = function(dom, evt, callback){
+                var neweEvt = _returnData(evt);
+                callback(dom, neweEvt);
+            };
+            var _onMove = function(dom, evt, callback){
+                var neweEvt = _returnData(evt);
+                callback(dom, neweEvt);
+            };
+            var _onOut = function(evt, callback){
+                var neweEvt = _returnData(evt);
+                callback(dom, neweEvt);
+            };
+            var rootEle = this.ele;
+            if( flg == undefined ) {
+                flg = true;
+            }
+            
+            switch(type){
+                case "mousemove" :
+                case "touchmove" :
+                    if( flg ) {
+                        rootEle.off(mouseMoveEvent, element);
+                    }
+                    rootEle.on(mouseMoveEvent, element, function(e){
+                        _onMove($(this), e, eventHandle);
+                    });
+                    break;
+                case "click" :
+                case "tap" :
+                    //按下松开之间的移动距离小于20，认为发生了tap
+                    var TAP_DISTANCE = 20;
+                    var pt_pos;
+                    var ct_pos;
+                    var startEvtHandler = function(e){
+                        var ev = _returnData(e);
+                        ct_pos = getTouchPos(ev);
+                    };
+                    var endEvtHandler = function(dom_,e, fn){
+                        // e.stopPropagation();
+                        var ev = _returnData(e);
+                        var now = Date.now();
+                        var pt_pos = getTouchPos(ev);
+                        var dist = getDist(ct_pos , pt_pos);
+                        if(dist < TAP_DISTANCE) {
+                            _onClick(dom_, e, eventHandle);
+                        }
+                    };
+                    if( flg ) {
+                        rootEle.off(mouseDownEvent, element);
+                        rootEle.off(mouseUpEvent, element);
+                    }
+                    rootEle.on(mouseDownEvent, element, function(e){
+                        if(e.button != 2){ // 防止右键点击触发事件
+                            startEvtHandler(e);
+                        }
+                    });
+                    rootEle.on(mouseUpEvent, element, function(e){
+                        if(e.button != 2){ // 防止右键点击触发事件
+                            var $this = $(this);
+                            endEvtHandler($this,e,eventHandle);
+                        }
+                    });
+                    break;
+                case "mousedown" :
+                case "touchstart" :
+                    if( flg ) {
+                        rootEle.off(mouseDownEvent, element);
+                    }
+                    rootEle.on(mouseDownEvent, element, function(e){
+                        _onClickDown($(this), e, eventHandle);
+                    });
+                    break;
+                case "mouseup" :
+                case "touchend" :
+                    if( flg ) {
+                        rootEle.off(mouseUpEvent, element);
+                    }
+                    rootEle.on(mouseUpEvent, element, function(e){
+                        _onClickUp($(this), e, eventHandle);
+                    });
+                    break;
+                case "mouseout" :
+                    if( flg ) {
+                        rootEle.off(mouseMoveOutEvent, element);
+                    }
+                    rootEle.on(mouseMoveOutEvent, element, function(e){
+                        endEvtHandler(e, eventHandle);
+                    });
+                    break;
+            }
+        }
     }
 	return Pushbutton;
 }));
