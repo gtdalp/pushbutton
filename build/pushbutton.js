@@ -98,6 +98,9 @@
 			return tpl;
         },
         hasClass: function (dom, cls) {
+            if (!dom) {
+                return false;
+            }
             var arr = dom.className.split(' ');
             if (arr.indexOf(cls) === 0) {
                 return true;
@@ -119,7 +122,6 @@
                 dom = e.target || e.srcElement;
                 cls = dom.className.split(' ');
                 
-                ;
                 flag = false;
                 if (typeof onClick === 'function') {
                     // 如果点击的回调函数返回true则不隐藏弹出框
