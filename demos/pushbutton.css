@@ -21,6 +21,7 @@
 	text-align: center; 
 	color: #333;
 }
+.widget-ui-pushbutton-list>a.pushbutton-cancel,
 .widget-ui-pushbutton-list>a.list-a{
 	display:block;
 	padding:15px; 
@@ -32,6 +33,7 @@
     text-overflow:ellipsis;
     overflow:hidden;
 }
+.widget-ui-pushbutton-list>a.pushbutton-cancel:active,
 .widget-ui-pushbutton-list>a.list-a:active{
 	background:#ccc;
 	color:#fff;
@@ -39,7 +41,7 @@
 .widget-ui-pushbutton-list>a.list-a:first-child{
 	border:none;
 }
-.widget-ui-pushbutton-list>a.list-a.pushbutton-cancel{
+.widget-ui-pushbutton-list>a.pushbutton-cancel{
 	color:#6DA0F6;	
 }
 .pushbutton ul{

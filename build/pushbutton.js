@@ -93,25 +93,47 @@
 				tpl += '<a href="javascript:void(0);" class="list-a ' + cls + '" ' + attr + '>' + text + '</a>';
 			}
 				
-			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel list-a">取消</a>\
+			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel">取消</a>\
 					</div>';
 			return tpl;
+        },
+        hasClass: function (dom, cls) {
+            var arr = dom.className.split(' ');
+            if (arr.indexOf(cls) === 0) {
+                return true;
+            } else {
+                return false;
+            }
         },
         // 事件
         event: function () {
             var id = this.id;
             var op = this.options;
             var onClick = op.onClick;
+            var flag = false;
+            var cls = [];
             var dom = '';
 
             // 点击
             id.on('click', function (e) {
                 dom = e.target || e.srcElement;
-                this.hide();
+                cls = dom.className.split(' ');
+                
+                ;
+                flag = false;
+                if (typeof onClick === 'function') {
+                    // 如果点击的回调函数返回true则不隐藏弹出框
+                    flag = onClick(dom);
+                    // 如果点击的元素是数据生成的则不隐藏
+                    if (!flag || !this.hasClass(dom, 'list-a')) {
+                        this.hide();
+                    }
+                } else {
+                    this.hide();
+                }
+                
             }.bind(this));
-            // if ($.isFuntion(onClick)) {
-            //     onClick(dom);
-            // }
+            
         },
         // 显示
         show: function () {
