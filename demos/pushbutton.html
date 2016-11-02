@@ -12,7 +12,7 @@
 </head>
 <body>
 <style type="text/css">
-#click{
+#pushbuttonClick{
 	position:absolute;
 	top:50%;
 	width:100%;
@@ -21,7 +21,7 @@
 	text-align:center;
 }
 </style>
-<div id="click">click show Pushbutton</div>
+<div id="pushbuttonClick">click show Pushbutton</div>
 <section id="pushbutton" class="pushbutton"></section>
 <script>
 require(['zepto', 'iscroll', 'pushbutton'], function(){
@@ -40,6 +40,11 @@ require(['zepto', 'iscroll', 'pushbutton'], function(){
 		},
         isShow: true   // 默认是否显示
 	});
+	var dom = document.getElementById("pushbuttonClick");
+	
+	dom.onclick = function () {
+		pub.show();
+	}
 });
 require.config({
     paths: {

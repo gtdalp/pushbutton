@@ -51,50 +51,86 @@
 	-webkit-animation:pushbuttonIn .35s forwards;
 }
 @keyframes pushbuttonIn{
-	from {opacity:0;background:rgba(0,0,0,0);}
-	to {opacity:1;background:rgba(0,0,0,0.5);}
+	from {
+		background:rgba(0,0,0,0);
+	}
+	to {
+		background:rgba(0,0,0,0.5);
+	}
 }
 @-webkit-keyframes pushbuttonIn{
-	from {opacity:0;}
-	to {opacity:1;}
+	from {
+		background:rgba(0,0,0,0);
+	}
+	to {
+		background:rgba(0,0,0,0.5);
+	}
 }
 .pushbutton-out{
 	animation:pushbuttonOut .35s forwards;
 	-webkit-animation:pushbuttonOut .35s forwards;
 }
 @keyframes pushbuttonOut{
-	from {opacity:1;}
-	to {opacity:0;}
+	from {
+		background:rgba(0,0,0,0.5);
+	}
+	to {
+		background:rgba(0,0,0,0);
+	}
 }
 @-webkit-keyframes pushbuttonOut{
-	from {opacity:1;}
-	to {opacity:0;}
+	from {
+		background:rgba(0,0,0,0.5);
+	}
+	to {
+		background:rgba(0,0,0,0);
+	}
 }
-.pushbutton-in ul.widget-ui-pushbutton-list{
+.pushbutton-in .widget-ui-pushbutton-list{
     animation:pushbuttonUlIn .35s forwards;
     -webkit-animation:pushbuttonUlIn .35s forwards;
 }
 @keyframes pushbuttonUlIn{
 	from {
-		transform: translate(0px, 100%) translateZ(0px);
+		-webkit-transform: translate(0, 100%) translateZ(0);
+		transform: translate(0, 100%) translateZ(0);
 	}
 	to {
-		transform: translate(0px, 0) translateZ(0px);
+		-webkit-transform: translate(0, 0) translateZ(0);
+		transform: translate(0, 0) translateZ(0);
 	}
 }
-/*@-webkit-keyframes pushbuttonUlIn{
-	from {bottom:-100%;}
-	to {bottom:0;}
-}*/
-.pushbutton-out ul.widget-ui-pushbutton-list{
+@-webkit-keyframes pushbuttonUlIn{
+	from {
+		-webkit-transform: translate(0, 100%) translateZ(0);
+		transform: translate(0, 100%) translateZ(0);
+	}
+	to {
+		-webkit-transform: translate(0, 0) translateZ(0);
+		transform: translate(0, 0) translateZ(0);
+	}
+}
+.pushbutton-out .widget-ui-pushbutton-list{
     animation:pushbuttonUlOut .35s forwards;
     -webkit-animation:pushbuttonUlOut .35s forwards;
 }
 @keyframes pushbuttonUlOut{
-	from {bottom:0;}
-	to {bottom:-100%;}
+	from {
+		-webkit-transform: translate(0, 0) translateZ(0);
+		transform: translate(0, 0) translateZ(0);
+	}
+	to {
+		-webkit-transform: translate(0, 100%) translateZ(0);
+		transform: translate(0, 100%) translateZ(0);
+	}
 }
 @-webkit-keyframes pushbuttonUlOut{
-	from {bottom:0;}
-	to {bottom:-100%;}
+	from {
+		-webkit-transform: translate(0, 0) translateZ(0);
+		transform: translate(0, 0) translateZ(0);
+	}
+	to {
+		-webkit-transform: translate(0, 100%) translateZ(0);
+		transform: translate(0, 100%) translateZ(0);
+	}
 }
