@@ -26,15 +26,20 @@
 	padding:15px; 
 	border-top:1px solid #d4d4d4; 
 	font-size: 16px;
+	color:#333;
 	cursor:pointer;
 	white-space:nowrap;
     text-overflow:ellipsis;
     overflow:hidden;
 }
+.widget-ui-pushbutton-list>a.list-a:active{
+	background:#ccc;
+	color:#fff;
+}
 .widget-ui-pushbutton-list>a.list-a:first-child{
 	border:none;
 }
-.pushbutton-cancel{
+.widget-ui-pushbutton-list>a.list-a.pushbutton-cancel{
 	color:#6DA0F6;	
 }
 .pushbutton ul{
@@ -46,8 +51,8 @@
 	-webkit-animation:pushbuttonIn .35s forwards;
 }
 @keyframes pushbuttonIn{
-	from {opacity:0;}
-	to {opacity:1;}
+	from {opacity:0;background:rgba(0,0,0,0);}
+	to {opacity:1;background:rgba(0,0,0,0.5);}
 }
 @-webkit-keyframes pushbuttonIn{
 	from {opacity:0;}
@@ -70,13 +75,17 @@
     -webkit-animation:pushbuttonUlIn .35s forwards;
 }
 @keyframes pushbuttonUlIn{
+	from {
+		transform: translate(0px, 100%) translateZ(0px);
+	}
+	to {
+		transform: translate(0px, 0) translateZ(0px);
+	}
+}
+/*@-webkit-keyframes pushbuttonUlIn{
 	from {bottom:-100%;}
 	to {bottom:0;}
-}
-@-webkit-keyframes pushbuttonUlIn{
-	from {bottom:-100%;}
-	to {bottom:0;}
-}
+}*/
 .pushbutton-out ul.widget-ui-pushbutton-list{
     animation:pushbuttonUlOut .35s forwards;
     -webkit-animation:pushbuttonUlOut .35s forwards;

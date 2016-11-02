@@ -107,8 +107,8 @@
             // 点击
             id.on('click', function (e) {
                 dom = e.target || e.srcElement;
-                console.log(e.srcElement);
-            });
+                this.hide();
+            }.bind(this));
             // if ($.isFuntion(onClick)) {
             //     onClick(dom);
             // }
