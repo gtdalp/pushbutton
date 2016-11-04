@@ -59,7 +59,7 @@ refresh.onclick = function () {
 ```
 
 效果图
-![demo.png](demo.png)
+![demo1.png](demo1.png)
 
 ###4、API
 
