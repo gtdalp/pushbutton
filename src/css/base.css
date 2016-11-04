@@ -48,6 +48,9 @@ img{
 em,i{
     font-style:normal;
 }
+a:focus,
+textarea:focus,
+input:focus,
 textarea,input{
     padding:0;
     margin:0;

@@ -1,7 +1,7 @@
 /**
  * pushbutton
  * xisa
- * 0.1.0(2014-2016)
+ * 0.2.0(2014-2016)
  */
  /*
     依赖iscroll 
@@ -29,10 +29,11 @@
         this.init(options);
     }
     Pushbutton.prototype = {
-    	version: '0.1.0',
+    	version: '0.2.0',
     	// 初始化
         init: function (options) {
             this.options = {};
+            this.options.maxHeight = 240;
             this.options.animateIn = 'pushbutton-in';
         	this.options.animateOut = 'pushbutton-out';
 
@@ -43,7 +44,7 @@
         },
         // 入口
         render: function () {
-            this.id.addClass('widget-ui-pushbutton').append(this.createTpl());
+            this.id.addClass('widget-ui-pushbutton').html(this.createTpl());
             this.show();
             // 事件
             this.event();
@@ -53,8 +54,11 @@
             this.id.remove();
         },
         // 刷新listloading
-        refresh: function () {
-            // 
+        refresh: function (op) {
+            if (!op) {
+                op = this.options;
+            }
+            this.init(op);
         },
         // 遍历obj
         forInAttr: function (data) {
@@ -67,13 +71,14 @@
         // 创建模板
         createTpl: function () {
             var dataF, cls, key, text, attr, i = 0, n = 0, arr, arrLen = 0;
-        	var data = this.options.data;
+            var op = this.options;
+        	var data = op.data;
         	var id = this.id;
         	if (!Array.isArray(data)) {
         		data = [];
         	}
         	var len = data.length;
-            var tpl = '<div class="widget-ui-pushbutton-list">';
+            var tpl = '<div class="widget-ui-pushbutton-list" style="max-height:' + op.maxHeight + 'px;">';
 
 			for (; i < len; i++) {
 				dataF = data[i];
@@ -90,28 +95,27 @@
                     }
                 }
 
-				tpl += '<a href="javascript:void(0);" class="list-a ' + cls + '" ' + attr + '>' + text + '</a>';
+				tpl += '<a href="javascript:void(0);" tabIndex="' + i + '" class="list-a ' + cls + '" ' + attr + '>' + text + '</a>';
 			}
-				
 			tpl += '<a href="javascript:void(0);" class="pushbutton-cancel">取消</a>\
 					</div>';
 			return tpl;
         },
-        hasClass: function (dom, cls) {
-            if (!dom) {
+        // 判断class是否存在
+        hasClass: function (node, cls, context) {
+            if (typeof node === 'string') {
+                node = (context || document).querySelector(node);
+            }
+            if (!node || !node.className || typeof cls !== 'string') {
                 return false;
             }
-            var arr = dom.className.split(' ');
-            if (arr.indexOf(cls) === 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return !!node.className.match(new RegExp('\\b' + cls + '\\b'));
         },
         // 事件
         event: function () {
             var id = this.id;
             var op = this.options;
+            var data = op.data || [];
             var onClick = op.onClick;
             var flag = false;
             var cls = [];
@@ -120,12 +124,13 @@
             // 点击
             id.on('click', function (e) {
                 dom = e.target || e.srcElement;
-                cls = dom.className.split(' ');
-                
                 flag = false;
+                // 点击第二条数据
+                e.index = e.target.tabIndex;
+                e.data = data[e.index];
                 if (typeof onClick === 'function') {
                     // 如果点击的回调函数返回true则不隐藏弹出框
-                    flag = onClick(dom);
+                    flag = onClick(e);
                     // 如果点击的元素是数据生成的则不隐藏
                     if (!flag || !this.hasClass(dom, 'list-a')) {
                         this.hide();
@@ -152,141 +157,6 @@
     		setTimeout(function() {
     			id.removeClass(Out + ' ' + In).hide();
     		}, 351);
-        },
-        // 点击事件
-        evt: function Events(element, type, eventHandle, flg){
-            var touchable = "ontouchstart" in window;
-            var clickEvent = touchable ? "touchstart" : "click",
-                mouseDownEvent = touchable ? "touchstart" : "mousedown",
-                mouseUpEvent = touchable ? "touchend" : "mouseup",
-                mouseMoveEvent = touchable ? "touchmove" : "mousemove",
-                mouseMoveOutEvent = touchable ? "touchleave" : "mouseout";
-            var _returnData = function(evt){
-                var neweEvt = {};
-                var cev = evt.originalEvent;
-                if( cev == undefined ) {
-                    cev = evt;
-                }
-                if(cev.changedTouches){
-                    neweEvt.pageX = cev.changedTouches[0].pageX;
-                    neweEvt.pageY = cev.changedTouches[0].pageY;
-                    neweEvt.clientX = cev.changedTouches[0].clientX;
-                    neweEvt.clientY = cev.changedTouches[0].clientY;
-                }else{
-                    neweEvt.pageX = evt.pageX;
-                    neweEvt.pageY = evt.pageY;
-                    neweEvt.clientX = evt.clientX;
-                    neweEvt.clientY = evt.clientY;
-                }
-                neweEvt.evt = evt;
-                return neweEvt;
-            };
-            var getTouchPos = function(e){
-                return { x : e.clientX , y: e.clientY };
-            }
-            //计算两点之间距离
-            var getDist = function(p1 , p2){
-                if(!p1 || !p2) return 0;
-                return Math.sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
-            };
-            var _onClick = function(dom, evt, callback){
-                var neweEvt = _returnData(evt);
-                callback(dom, neweEvt);
-            };
-            var _onClickDown = function(dom, evt, callback){
-                var neweEvt = _returnData(evt);
-                callback(dom, neweEvt);
-            };
-            var _onClickUp = function(dom, evt, callback){
-                var neweEvt = _returnData(evt);
-                callback(dom, neweEvt);
-            };
-            var _onMove = function(dom, evt, callback){
-                var neweEvt = _returnData(evt);
-                callback(dom, neweEvt);
-            };
-            var _onOut = function(evt, callback){
-                var neweEvt = _returnData(evt);
-                callback(dom, neweEvt);
-            };
-            var rootEle = this.ele;
-            if( flg == undefined ) {
-                flg = true;
-            }
-            
-            switch(type){
-                case "mousemove" :
-                case "touchmove" :
-                    if( flg ) {
-                        rootEle.off(mouseMoveEvent, element);
-                    }
-                    rootEle.on(mouseMoveEvent, element, function(e){
-                        _onMove($(this), e, eventHandle);
-                    });
-                    break;
-                case "click" :
-                case "tap" :
-                    //按下松开之间的移动距离小于20，认为发生了tap
-                    var TAP_DISTANCE = 20;
-                    var pt_pos;
-                    var ct_pos;
-                    var startEvtHandler = function(e){
-                        var ev = _returnData(e);
-                        ct_pos = getTouchPos(ev);
-                    };
-                    var endEvtHandler = function(dom_,e, fn){
-                        // e.stopPropagation();
-                        var ev = _returnData(e);
-                        var now = Date.now();
-                        var pt_pos = getTouchPos(ev);
-                        var dist = getDist(ct_pos , pt_pos);
-                        if(dist < TAP_DISTANCE) {
-                            _onClick(dom_, e, eventHandle);
-                        }
-                    };
-                    if( flg ) {
-                        rootEle.off(mouseDownEvent, element);
-                        rootEle.off(mouseUpEvent, element);
-                    }
-                    rootEle.on(mouseDownEvent, element, function(e){
-                        if(e.button != 2){ // 防止右键点击触发事件
-                            startEvtHandler(e);
-                        }
-                    });
-                    rootEle.on(mouseUpEvent, element, function(e){
-                        if(e.button != 2){ // 防止右键点击触发事件
-                            var $this = $(this);
-                            endEvtHandler($this,e,eventHandle);
-                        }
-                    });
-                    break;
-                case "mousedown" :
-                case "touchstart" :
-                    if( flg ) {
-                        rootEle.off(mouseDownEvent, element);
-                    }
-                    rootEle.on(mouseDownEvent, element, function(e){
-                        _onClickDown($(this), e, eventHandle);
-                    });
-                    break;
-                case "mouseup" :
-                case "touchend" :
-                    if( flg ) {
-                        rootEle.off(mouseUpEvent, element);
-                    }
-                    rootEle.on(mouseUpEvent, element, function(e){
-                        _onClickUp($(this), e, eventHandle);
-                    });
-                    break;
-                case "mouseout" :
-                    if( flg ) {
-                        rootEle.off(mouseMoveOutEvent, element);
-                    }
-                    rootEle.on(mouseMoveOutEvent, element, function(e){
-                        endEvtHandler(e, eventHandle);
-                    });
-                    break;
-            }
         }
     }
 	return Pushbutton;
