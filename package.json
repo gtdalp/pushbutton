@@ -1,7 +1,7 @@
 {
-  "name": "pushbutton",
-  "version": "0.2.0",
-  "description": "http://hapjs.github.io/pushbutton/demos/pushbutton.html",
+  "name": "pushbuttonjs",
+  "version": "1.0.0",
+  "description": "http://gtdalp.github.io/pushbutton/demos/pushbutton.html",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

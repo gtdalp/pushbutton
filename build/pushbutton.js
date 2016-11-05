@@ -1,10 +1,9 @@
 /**
  * pushbutton
  * xisa
- * 0.2.0(2014-2016)
+ * 1.0.0(2014-2016)
  */
  /*
-    依赖iscroll 
     底层库使用 Zepto 或者 jQuery
  */
 ;(function(root, factory) {
@@ -29,7 +28,7 @@
         this.init(options);
     }
     Pushbutton.prototype = {
-    	version: '0.2.0',
+    	version: '1.0.0',
     	// 初始化
         init: function (options) {
             this.options = {};
@@ -49,14 +48,16 @@
             // 事件
             this.event();
         },
-        // 销毁ListLoading
+        // 销毁pushbutton
         destroy: function () {
             this.id.remove();
         },
-        // 刷新listloading
+        // 刷新pushbutton
         refresh: function (op) {
             if (!op) {
                 op = this.options;
+            } else {
+                $.extend(this.options, op);
             }
             this.init(op);
         },

@@ -1,15 +1,11 @@
 /*pushbutton*/
-.pushbutton,
-.pushbutton>.bg{
+.widget-ui-pushbutton{
 	position:absolute;
 	top:0;
 	left:0;
 	z-index:100;
 	width:100%;
 	height:100%;
-}
-.pushbutton>.bg{
-	background:rgba(0,0,0,.4);
 }
 .widget-ui-pushbutton-list{
 	position:absolute;
@@ -44,9 +40,6 @@
 }
 .widget-ui-pushbutton-list>a.pushbutton-cancel{
 	color:#6DA0F6;	
-}
-.pushbutton ul{
-	bottom:-100%;
 }
 .pushbutton-in{
 	display:block;
