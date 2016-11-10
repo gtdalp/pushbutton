@@ -19,7 +19,6 @@ npm install pushbuttonjs
 
 ###2、需要引入的js
 ```javascript
-<script src="../src/jslib/zepto.min.js"></script>
 <script src="../build/pushbutton.min.js"></script>
 ```
 ###3、调用
