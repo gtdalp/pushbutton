@@ -2,7 +2,7 @@
 移动端从下往上推动画效果端弹出列表选择框，适应所有主流移动端机型，支持Node引入，require引入;如有用得不爽可以随时提意见，谢谢。
 
 
-demo地址: <a href="https://gtdalp.github.io/widget/pushbutton/demos/pushbutton.html">https://gtdalp.github.io/widget/pushbutton/demos/pushbutton.html</a>
+demo地址: <a href="https://gtdalp.github.io/widget/pushbutton/test.html">https://gtdalp.github.io/widget/pushbutton/demos/pushbutton.html</a>
 
 ###npm安装
 ```javascript
@@ -19,7 +19,6 @@ npm install pushbuttonjs
 
 ###2、需要引入的js
 ```javascript
-<script src="../src/jslib/zepto.min.js"></script>
 <script src="../build/pushbutton.min.js"></script>
 ```
 ###3、调用
