@@ -1,6 +1,6 @@
 {
   "name": "pushbuttonjs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "http://gtdalp.github.io/pushbutton/demos/pushbutton.html",
   "main": "index.js",
   "scripts": {
